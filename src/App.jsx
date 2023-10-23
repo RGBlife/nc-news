@@ -1,13 +1,15 @@
 import "./App.css";
-import Header from "./components/Header";
-import ArticlesPage from "./components/ArticlesPage";
-import NotFoundPage from "./components/NotFoundPage";
+import Header from "./layouts/Header";
+import ArticlesPage from "./Pages/ArticlesPage";
+import NotFoundPage from "./Pages/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  // Will use below in next tasks
+  // const [isLoading, setIsLoading] = useState(true)
   // const [error, setError] = useState(null)
+  
   return (
     <main>
       <Header />
