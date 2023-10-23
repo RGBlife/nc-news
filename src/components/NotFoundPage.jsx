@@ -1,10 +1,9 @@
-const ErrorPage = () => {
+const NotFoundPage = () => {
     return (
-        <nav className="flex items-center justify-items-center">
-            <p>404:</p>
-            <p>Page not found!</p>
+        <nav className="flex justify-center items-center min-h-screen">
+            <p>404: Page not found!</p>
         </nav>
     )
 }
 
-export default ErrorPage
+export default NotFoundPage

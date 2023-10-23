@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+  // const [error, setError] = useState(null)
   return (
     <main>
       <Header />
@@ -13,8 +15,8 @@ function App() {
         <Route
           path="/"
           element={
-            <section className="m-16">
-              <ArticlesPage />
+            <section className="flex flex-col my-2 lg:m-16">
+              <ArticlesPage/>
             </section>
           }
         />

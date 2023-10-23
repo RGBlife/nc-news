@@ -4,15 +4,10 @@ const request = axios.create({
   baseURL: "https://article-hub-api.onrender.com/api",
 });
 
-export const getArticles = async () => {
-  try {
-    const {
-      data: { articles },
-    } = await request.get("articles");
-    console.log(articles);
-    return articles;
-  } catch (error) {
-    console.log(error, "error at getArticles");
-  }
-};
+export const getArticles = async (page = 1, signal) => {
+  const {
+    data: { articles },
+  } = await request.get(`articles?p=${page}`, { signal: signal });
 
+  return articles;
+};
