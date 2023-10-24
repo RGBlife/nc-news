@@ -15,8 +15,8 @@ function App() {
     <main className="mt-[80px]">
       <Header/>
       <Routes>
-        <Route path="/" element={<ArticlesPage loaded={loaded} setLoaded={setLoaded}/>} />
-        <Route path="/articles/:article_id" element={<ArticlePage loaded={loaded} setLoaded={setLoaded}/>}></Route>
+        <Route path="/" element={<ArticlesPage/>} />
+        <Route path="/articles/:article_id" element={<ArticlePage/>}></Route>
         <Route path="/articles/:topic_slug" element={<ArticlesPage />}></Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

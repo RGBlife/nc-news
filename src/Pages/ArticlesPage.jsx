@@ -4,7 +4,8 @@ import { isScrolledToBottom } from "../utils/utils";
 import { timeDiffToCurrentDate } from "../utils/utils";
 import { Link } from "react-router-dom";
 
-const ArticlesPage = ({ loaded, setLoaded }) => {
+const ArticlesPage = () => {
+  const [loaded, setLoaded] = useState(false);
   const [articlesList, setArticlesList] = useState([]);
   const [page, setPage] = useState(1);
   const [endOfList, setEndOfList] = useState(false);

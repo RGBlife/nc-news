@@ -5,6 +5,7 @@
 - [ ] On article card, add up and bottom arrows on the voting that will later be used
 - [ ] NavBar needs more adjustments, there's too much NavBar height
 - [ ] Add grow transitions to NavBar buttons
+- [ ] Add Light / Dark mode if I have any time through useContext
 
 ## Infinite Scroll
 - [x] Page refreshes
@@ -29,6 +30,5 @@
 - [x] Design the page with the data, this will have the article content and then Article info as a sidebar
 - [x] Add Footer
 
-## ArticlesPage
-- [ ] Because of infinite scroll, i'll add footer in a sidebar
+
 

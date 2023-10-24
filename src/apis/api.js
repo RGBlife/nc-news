@@ -19,3 +19,13 @@ export const getArticleById = async (id, signal) => {
 
   return article;
 };
+
+export const getCommentsByArticleId = async (id, signal) => {
+    console.log("id",id,"signal", signal);
+  let {
+    data: { topics },
+  } = await request.get(`articles/${id}/comments`, { signal: signal });
+  const comments = topics;
+  console.log(comments);
+  return comments;
+};
