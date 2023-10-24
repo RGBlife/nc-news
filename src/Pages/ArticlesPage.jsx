@@ -4,7 +4,7 @@ import { isScrolledToBottom } from "../utils/utils";
 import { timeDiffToCurrentDate } from "../utils/utils";
 import { Link } from "react-router-dom";
 
-const ArticlesPage = ({ isLoading, setIsLoading }) => {
+const ArticlesPage = ({ loaded, setLoaded }) => {
   const [articlesList, setArticlesList] = useState([]);
   const [page, setPage] = useState(1);
   const [endOfList, setEndOfList] = useState(false);
@@ -14,7 +14,7 @@ const ArticlesPage = ({ isLoading, setIsLoading }) => {
 
     const fetchArticles = async () => {
       if (endOfList) return;
-      setIsLoading(true);
+      setLoaded(false);
 
       try {
         const response = await getArticles(page, controller.signal);
@@ -23,7 +23,7 @@ const ArticlesPage = ({ isLoading, setIsLoading }) => {
       } catch (error) {
         //noop
       } finally {
-        setIsLoading(false);
+        setLoaded(true);
       }
     };
     fetchArticles();
@@ -47,7 +47,7 @@ const ArticlesPage = ({ isLoading, setIsLoading }) => {
     };
   }, []);
 
-  if (isLoading && articlesList.length === 0) return <p>Loading</p>;
+  if (!loaded && articlesList.length === 0) return <p>Loading</p>;
 
   return (
     <>

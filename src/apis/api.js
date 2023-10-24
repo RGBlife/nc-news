@@ -16,7 +16,6 @@ export const getArticleById = async (id, signal) => {
   const {
     data: { article },
   } = await request.get(`articles/${id}`, { signal: signal });
-  console.log(article);
 
   return article;
 };

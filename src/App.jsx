@@ -7,16 +7,16 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
+  const [loaded, setLoaded] = useState(false)
   // Will use below in next tasks
-  const [isLoading, setIsLoading] = useState(true)
   // const [error, setError] = useState(null)
 
   return (
-    <main>
-      <Header />
+    <main className="mt-[80px]">
+      <Header/>
       <Routes>
-        <Route path="/" element={<ArticlesPage isLoading={isLoading} setIsLoading={setIsLoading}/>} />
-        <Route path="/articles/:article_id" element={<ArticlePage isLoading={isLoading} setIsLoading={setIsLoading}/>}></Route>
+        <Route path="/" element={<ArticlesPage loaded={loaded} setLoaded={setLoaded}/>} />
+        <Route path="/articles/:article_id" element={<ArticlePage loaded={loaded} setLoaded={setLoaded}/>}></Route>
         <Route path="/articles/:topic_slug" element={<ArticlesPage />}></Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

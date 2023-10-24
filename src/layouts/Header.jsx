@@ -1,14 +1,40 @@
 import { Link } from "react-router-dom";
 
 const Header = () => {
-    return (
-        <nav className=" bg-[#F5F5F5] flex justify-between max-w-6xl mx-auto px-4 border-solid border-1 border-[#F5F5F5] sticky top-0 space-x-1 items-center lg:max-w-full z-50">
-            <a className="py-4 px-2  text-[#D83367] font-semibold hover:text-green-500 transition duration-300">Topics</a>
-            <Link className="py-4 px-2 text-[#D83367] font-semibold " to="/" ><img alt="Company Logo" className="lg:w-[15%] w-[40%] hover:fill-slate-100 transition duration-300" src="/dblp.svg"></img></Link>
-            <a className="py-4 px-2 text-[#D83367] font-semibold hover:text-green-500 transition duration-300">+</a>
-            <a className="py-4 px-2 text-[#D83367] font-semibold hover:text-green-500 transition duration-300">User</a>
+  return (
+    <header className="top-0 z-999 fixed w-full bg-[#F5F5F5] border-b border-solid border-[#F5F5F5]">
+      <div className="flex align-center justify-between py-0 px-7 min-h-[64px]">
+        <Link to="/">
+          <img
+            alt="Company Logo"
+            className="lg:w-[10%] w-[30%] "
+            src="/dblp.svg"
+          ></img>
+        </Link>
+        <nav className="flex justify-center items-center">
+          <ul className="flex gap-10">
+            <li>
+              <a className="text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75">
+                Topics
+              </a>
+            </li>
+            <li>
+              <a className=" text-[20px] text-[#FFFFFF] font-semibold hover:text-[#50192b]">
+                <button className="bg-[#D83367] rounded-lg h-[35px] w-[35px] hover:bg-[#C02759] transition delay-75">
+                  +
+                </button>
+              </a>
+            </li>
+            <li>
+              <a className=" text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75">
+                User
+              </a>
+            </li>
+          </ul>
         </nav>
-    )
-}
+      </div>
+    </header>
+  );
+};
 
-export default Header
+export default Header;
