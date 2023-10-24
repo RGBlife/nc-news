@@ -11,3 +11,11 @@ export const getArticles = async (page = 1, signal) => {
 
   return articles;
 };
+
+export const getArticleById = async (id, signal) => {
+  const {
+    data: { article },
+  } = await request.get(`articles/${id}`, { signal: signal });
+
+  return article;
+};

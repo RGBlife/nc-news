@@ -1,8 +1,8 @@
 const Footer = () => {
     return (
-        <section>
+        <footer className="flex-1 m-auto pt-16 pb-12">
             <p>Footer</p>
-        </section>
+        </footer>
     )
 }
 
