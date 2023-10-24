@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import { getArticleById } from "../apis/api";
 import { timeDiffToCurrentDate } from "../utils/utils";
 import Footer from "../layouts/Footer";
+import CommentsSection from "../components/CommentsSection";
 
-const ArticlePage = ({ loaded, setLoaded }) => {
+const ArticlePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
 
@@ -12,7 +14,7 @@ const ArticlePage = ({ loaded, setLoaded }) => {
     const controller = new AbortController();
 
     const fetchArticle = async () => {
-      setLoaded(false);
+      setIsLoading(true);
 
       try {
         const response = await getArticleById(article_id, controller.signal);
@@ -21,7 +23,7 @@ const ArticlePage = ({ loaded, setLoaded }) => {
         console.log("error at api request", error);
         //noop
       } finally {
-        setLoaded(true);
+        setIsLoading(false);
       }
     };
     fetchArticle();
@@ -30,11 +32,11 @@ const ArticlePage = ({ loaded, setLoaded }) => {
     };
   }, []);
 
-  if (!loaded) return <p>Loading</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
-    <section className="flex-1 overflow-y-auto">
-      <div className="flex flex-col border-solid border-2 p-4">
+    <article className="flex-1 overflow-y-auto">
+      <section className="flex flex-col border-solid border-2 p-4">
         <div className="flex justify-center text-center mb-4">
           <h2 className="text-20 font-bold">{article.topic}</h2>
         </div>
@@ -51,13 +53,14 @@ const ArticlePage = ({ loaded, setLoaded }) => {
           alt={article.title}
         ></img>
         <p className="text-16">{article.body}</p>
-      </div>
-      <div className="mt-4 border-cyan-500 border-solid border-2 flex flex-col justify-center items-center">
+      </section>
+      <section className="mt-4 border-cyan-500 border-solid border-2 flex flex-col justify-center items-center">
         <p className="text-14">Votes: {article.votes}</p>
         <p className="text-14">Comments: {article.comment_count}</p>
-      </div>
+      </section>
+      <CommentsSection currentUserId="1" article_id={article_id} />
       <Footer />
-    </section>
+    </article>
   );
 };
 
