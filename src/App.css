@@ -7,12 +7,20 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* nav {
+  padding-top: 160px;
+} */
+
 @layer base {
   h1,
   h2,
   a,
   p {
     font-family: "Inter", sans-serif;
+    color: #333333;
+  }
+  a:hover {
+    color: #d83367;
   }
   h1 {
     @apply text-2xl;
@@ -22,5 +30,10 @@
   }
   a {
     @apply text-xl text-center m-8;
+  }
+  body {
+  }
+  :root {
+    @apply flex min-h-screen flex-col;
   }
 }
