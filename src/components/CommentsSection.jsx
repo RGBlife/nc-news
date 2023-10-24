@@ -1,15 +1,16 @@
 import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
+import { timeDiffToCurrentDate } from "../utils/utils";
 
-const CommentsSection = ({ currentUserId, article_id}) => {
+const CommentsSection = ({ currentUserId, article_id }) => {
   const [comments, setComments] = useState([]);
-  const [loaded, setLoaded] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const controller = new AbortController();
 
     const fetchComments = async () => {
-      setLoaded(false);
+      setIsLoading(true);
 
       try {
         const response = await getCommentsByArticleId(
@@ -21,7 +22,7 @@ const CommentsSection = ({ currentUserId, article_id}) => {
         console.log("error at api request", error);
         //noop
       } finally {
-        setLoaded(true);
+        setIsLoading(false);
       }
     };
     fetchComments();
@@ -30,10 +31,26 @@ const CommentsSection = ({ currentUserId, article_id}) => {
     };
   }, []);
 
-  if (!loaded) return <p>Loading</p>;
+  if (isLoading) return <p>Loading</p>;
   return (
-    <section>
-      <p>CommentsSection</p>
+    <section className="flex flex-col">
+      {comments.map((comment) => {
+        return (
+          <div
+            className="py-4 px-2 flex flex-col border-solid rounded-md border-[1px] border-sky-500"
+            key={comment.comment_id}
+          >
+            <span className="flex">
+              <p>{comment.author}</p>
+              <p className="px-2">{`${timeDiffToCurrentDate(
+                comment.created_at
+              )} ago`}</p>
+            </span>
+            <p>{comment.body}</p>
+            <p>Votes: {comment.votes}</p>
+          </div>
+        );
+      })}
     </section>
   );
 };

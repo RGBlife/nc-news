@@ -6,7 +6,7 @@ import Footer from "../layouts/Footer";
 import CommentsSection from "../components/CommentsSection";
 
 const ArticlePage = () => {
-  const [loaded, setLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
 
@@ -14,7 +14,7 @@ const ArticlePage = () => {
     const controller = new AbortController();
 
     const fetchArticle = async () => {
-      setLoaded(false);
+      setIsLoading(true);
 
       try {
         const response = await getArticleById(article_id, controller.signal);
@@ -23,7 +23,7 @@ const ArticlePage = () => {
         console.log("error at api request", error);
         //noop
       } finally {
-        setLoaded(true);
+        setIsLoading(false);
       }
     };
     fetchArticle();
@@ -32,7 +32,7 @@ const ArticlePage = () => {
     };
   }, []);
 
-  if (!loaded) return <p>Loading</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <article className="flex-1 overflow-y-auto">

@@ -4,28 +4,56 @@ const request = axios.create({
   baseURL: "https://article-hub-api.onrender.com/api",
 });
 
-export const getArticles = async (page = 1, signal) => {
-  const {
-    data: { articles },
-  } = await request.get(`articles?p=${page}`, { signal: signal });
+const api = {
+  getArticles: async (page = 1, signal) => {
+    const {
+      data: { articles },
+    } = await request.get(`articles?p=${page}`, { signal: signal });
 
-  return articles;
+    return articles;
+  },
+
+  getArticleById: async (id, signal) => {
+    const {
+      data: { article },
+    } = await request.get(`articles/${id}`, { signal: signal });
+
+    return article;
+  },
+
+  getCommentsByArticleId: async (id, signal) => {
+    let {
+      data: { articleComments },
+    } = await request.get(`articles/${id}/comments`, { signal: signal });
+    return articleComments;
+  },
 };
 
-export const getArticleById = async (id, signal) => {
-  const {
-    data: { article },
-  } = await request.get(`articles/${id}`, { signal: signal });
+const artificialSleep = (requests) => {
+  let modules = {};
+  Object.entries(requests).forEach(([key, value]) => {
+    modules[key] = (...args) => {
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() =>
+          value(...args)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
+        );
+      });
 
-  return article;
+      return promise;
+    };
+  });
+
+  return modules;
 };
 
-export const getCommentsByArticleId = async (id, signal) => {
-    console.log("id",id,"signal", signal);
-  let {
-    data: { topics },
-  } = await request.get(`articles/${id}/comments`, { signal: signal });
-  const comments = topics;
-  console.log(comments);
-  return comments;
-};
+const { getArticles, getArticleById, getCommentsByArticleId } = artificialSleep(
+  {
+    getArticles: api.getArticles,
+    getArticleById: api.getArticleById,
+    getCommentsByArticleId: api.getCommentsByArticleId,
+  }
+);
+
+export { getArticles, getArticleById, getCommentsByArticleId };
