@@ -21,18 +21,18 @@ const ArticlePage = () => {
         setArticle(response);
       } catch (error) {
         console.log("error at api request", error);
-        //noop
       } finally {
         setIsLoading(false);
       }
     };
     fetchArticle();
+
     return () => {
       controller.abort();
     };
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <article className="flex-1 overflow-y-auto">

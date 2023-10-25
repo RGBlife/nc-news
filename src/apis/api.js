@@ -22,10 +22,18 @@ const api = {
   },
 
   getCommentsByArticleId: async (id, signal) => {
-    let {
+    const {
       data: { articleComments },
     } = await request.get(`articles/${id}/comments`, { signal: signal });
     return articleComments;
+  },
+
+  patchArticleById: async (vote, id) => {
+    const {
+      data: { patchedArticle },
+    } = await request.patch(`articles/${id}`, { inc_votes: vote });
+    console.log(patchedArticle.votes);
+    return patchedArticle;
   },
 };
 
@@ -48,12 +56,21 @@ const artificialSleep = (requests) => {
   return modules;
 };
 
-const { getArticles, getArticleById, getCommentsByArticleId } = artificialSleep(
-  {
-    getArticles: api.getArticles,
-    getArticleById: api.getArticleById,
-    getCommentsByArticleId: api.getCommentsByArticleId,
-  }
-);
+const {
+  getArticles,
+  getArticleById,
+  getCommentsByArticleId,
+  patchArticleById,
+} = artificialSleep({
+  getArticles: api.getArticles,
+  getArticleById: api.getArticleById,
+  getCommentsByArticleId: api.getCommentsByArticleId,
+  patchArticleById: api.patchArticleById,
+});
 
-export { getArticles, getArticleById, getCommentsByArticleId };
+export {
+  getArticles,
+  getArticleById,
+  getCommentsByArticleId,
+  patchArticleById,
+};
