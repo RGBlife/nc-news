@@ -2,6 +2,7 @@ import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
 import { timeDiffToCurrentDate } from "../utils/utils";
 
+// currentUserId added in case
 const CommentsSection = ({ currentUserId, article_id }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,8 +20,7 @@ const CommentsSection = ({ currentUserId, article_id }) => {
         );
         setComments(response);
       } catch (error) {
-        console.log("error at api request", error);
-        //noop
+        
       } finally {
         setIsLoading(false);
       }

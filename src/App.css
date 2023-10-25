@@ -14,10 +14,7 @@
   p {
     color: #333333;
   }
-  a:hover {
-    color: #d83367;
-    cursor: pointer;
-  }
+
   h1 {
     @apply text-2xl;
   }
