@@ -20,8 +20,7 @@ const CommentsSection = ({ currentUserId, article_id }) => {
         );
         setComments(response);
       } catch (error) {
-        console.log("error at api request", error);
-        //noop
+        
       } finally {
         setIsLoading(false);
       }

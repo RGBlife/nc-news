@@ -4,9 +4,11 @@ import { getArticleById } from "../apis/api";
 import { timeDiffToCurrentDate } from "../utils/utils";
 import Footer from "../layouts/Footer";
 import CommentsSection from "../components/CommentsSection";
+import Voting from "../components/Voting";
 
 const ArticlePage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
 
@@ -20,7 +22,7 @@ const ArticlePage = () => {
         const response = await getArticleById(article_id, controller.signal);
         setArticle(response);
       } catch (error) {
-        console.log("error at api request", error);
+        if (error.code !== "ERR_CANCELED") setIsError(true);
       } finally {
         setIsLoading(false);
       }
@@ -33,12 +35,16 @@ const ArticlePage = () => {
   }, []);
 
   if (isLoading) return <h1>Loading...</h1>;
+  if (isError)
+    return (
+      <h1>Error with fetching Articles, please try again later. {isError}</h1>
+    );
 
   return (
     <article className="flex-1 overflow-y-auto">
-      <section className="flex flex-col border-solid border-2 p-4">
+      <section className="flex flex-col border-solid border-2 p-4 shadow-md">
         <div className="flex justify-center text-center mb-4">
-          <h2 className="text-20 font-bold">{article.topic}</h2>
+          <h2 className="capitalize text-20 font-bold">{article.topic}</h2>
         </div>
         <div className="flex flex-row mb-4">
           <p className="m-2 text-14">Posted by {article.author}</p>
@@ -54,8 +60,8 @@ const ArticlePage = () => {
         ></img>
         <p className="text-16">{article.body}</p>
       </section>
-      <section className="mt-4 border-cyan-500 border-solid border-2 flex flex-col justify-center items-center">
-        <p className="text-14">Votes: {article.votes}</p>
+      <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
+        <Voting article={article}/>
         <p className="text-14">Comments: {article.comment_count}</p>
       </section>
       <CommentsSection currentUserId="1" article_id={article_id} />

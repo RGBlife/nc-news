@@ -28,9 +28,7 @@ const ArticleCard = ({ article }) => {
           </div>
         </Link>
         <div className="mt-4 flex justify-center gap-5 mb-4">
-          <div className="text-14 flex flex-col text-center">
-            <Voting article={article} />
-          </div>
+          <Voting article={article} />
           <div className="text-14 flex flex-col text-center">
             <p>Comments </p>
             <p>{article.comment_count}</p>

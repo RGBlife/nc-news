@@ -32,7 +32,6 @@ const api = {
     const {
       data: { patchedArticle },
     } = await request.patch(`articles/${id}`, { inc_votes: vote });
-    console.log(patchedArticle.votes);
     return patchedArticle;
   },
 };
