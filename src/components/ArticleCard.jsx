@@ -28,7 +28,7 @@ const ArticleCard = ({ article }) => {
           </div>
         </Link>
         <div className="mt-4 flex justify-center gap-5 mb-4">
-          <Voting article={article} />
+          <Voting votes={article.votes} article_id={article.article_id} />
           <div className="text-14 flex flex-col text-center">
             <p>Comments </p>
             <p>{article.comment_count}</p>

@@ -34,6 +34,16 @@ const api = {
     } = await request.patch(`articles/${id}`, { inc_votes: vote });
     return patchedArticle;
   },
+
+  postCommentByArticleId: async (id, username, body) => {
+    const {
+      data: { insertedComment },
+    } = await request.post(`articles/${id}/comments`, {
+      body,
+      username,
+    });
+    return insertedComment;
+  },
 };
 
 const artificialSleep = (requests) => {
@@ -60,11 +70,13 @@ const {
   getArticleById,
   getCommentsByArticleId,
   patchArticleById,
+  postCommentByArticleId,
 } = artificialSleep({
   getArticles: api.getArticles,
   getArticleById: api.getArticleById,
   getCommentsByArticleId: api.getCommentsByArticleId,
   patchArticleById: api.patchArticleById,
+  postCommentByArticleId: api.postCommentByArticleId,
 });
 
 export {
@@ -72,4 +84,5 @@ export {
   getArticleById,
   getCommentsByArticleId,
   patchArticleById,
+  postCommentByArticleId,
 };

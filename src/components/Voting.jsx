@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { patchArticleById } from "../apis/api";
 
-const Voting = ({ article: { votes, article_id } }) => {
+const Voting = ({votes, article_id}) => {
   const [adjustVote, setAdjustVote] = useState(0);
   const [VoteColour, setVoteColour] = useState("#83878c");
 
@@ -24,6 +24,8 @@ const Voting = ({ article: { votes, article_id } }) => {
       setVoteColour("#83878c");
     });
   };
+
+
 
   return (
     <div className="p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">
