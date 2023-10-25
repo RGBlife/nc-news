@@ -50,13 +50,13 @@ const ArticlesPage = () => {
   if (isLoading && articlesList.length === 0) return <p>Loading</p>;
 
   return (
-    <>
+    <div className="flex flex-col gap-3 items-center">
       {articlesList.map((article) => {
         return (
           <ArticleCard key={article.article_id} article={article}/>
         );
       })}
-    </>
+    </div>
   );
 };
 

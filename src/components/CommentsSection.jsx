@@ -2,6 +2,7 @@ import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
 import { timeDiffToCurrentDate } from "../utils/utils";
 
+// currentUserId added in case
 const CommentsSection = ({ currentUserId, article_id }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

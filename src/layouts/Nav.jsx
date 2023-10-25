@@ -9,7 +9,7 @@ const Nav = () => {
           </li>
           <li>
             <a className=" text-[20px] text-[#FFFFFF] font-semibold hover:text-[#50192b]">
-              <button className="bg-[#D83367] rounded-lg h-[35px] w-[35px] hover:bg-[#C02759] transition delay-75">
+              <button className="flex justify-center items-center leading-3 bg-[#D83367] rounded-lg h-[35px] w-[35px] hover:bg-[#C02759] transition delay-75">
                 +
               </button>
             </a>
