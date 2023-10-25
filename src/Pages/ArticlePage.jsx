@@ -34,7 +34,7 @@ const ArticlePage = () => {
     };
   }, []);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading || article.votes === undefined) return <h1>Loading...</h1>;
   if (isError)
     return (
       <h1>Error with fetching Articles, please try again later. {isError}</h1>
@@ -61,10 +61,11 @@ const ArticlePage = () => {
         <p className="text-16">{article.body}</p>
       </section>
       <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
-        <Voting article={article}/>
+        <Voting votes={article.votes} article_id={article_id} />
         <p className="text-14">Comments: {article.comment_count}</p>
       </section>
-      <CommentsSection currentUserId="1" article_id={article_id} />
+      
+      <CommentsSection article_id={article_id} user="tickle122"/>
       <Footer />
     </article>
   );

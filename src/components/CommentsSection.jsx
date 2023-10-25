@@ -1,9 +1,10 @@
 import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
-import { timeDiffToCurrentDate } from "../utils/utils";
+import Comment from "./Comment";
+import CommentAdder from "./CommentAdder";
+import { postCommentByArticleId } from "../apis/api";
 
-// currentUserId added in case
-const CommentsSection = ({ currentUserId, article_id }) => {
+const CommentsSection = ({ article_id, user }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,7 +21,6 @@ const CommentsSection = ({ currentUserId, article_id }) => {
         );
         setComments(response);
       } catch (error) {
-        
       } finally {
         setIsLoading(false);
       }
@@ -31,25 +31,22 @@ const CommentsSection = ({ currentUserId, article_id }) => {
     };
   }, []);
 
+  const addComment = (text) => {
+    console.log(text);
+
+    postCommentByArticleId(article_id, user, text)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(() => {});
+  };
+
   if (isLoading) return <p>Loading</p>;
   return (
     <section className="flex flex-col">
+      <CommentAdder submitLabel="Write" handleSubmit={addComment} />
       {comments.map((comment) => {
-        return (
-          <div
-            className="py-4 px-2 flex flex-col border-solid rounded-md border-[1px] border-sky-500"
-            key={comment.comment_id}
-          >
-            <span className="flex">
-              <p>{comment.author}</p>
-              <p className="px-2">{`${timeDiffToCurrentDate(
-                comment.created_at
-              )} ago`}</p>
-            </span>
-            <p>{comment.body}</p>
-            <p>Votes: {comment.votes}</p>
-          </div>
-        );
+        return <Comment key={comment.comment_id} comment={comment} />;
       })}
     </section>
   );

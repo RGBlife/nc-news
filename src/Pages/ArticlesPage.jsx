@@ -36,7 +36,7 @@ const ArticlesPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isScrolledToBottom()) {
+      if (!isLoading && isScrolledToBottom()) {
         setPage((prevPage) => prevPage + 1);
       }
     };
@@ -46,7 +46,7 @@ const ArticlesPage = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isLoading]);
 
   if (isLoading && articlesList.length === 0) return <h1>Loading</h1>;
   if (isError)

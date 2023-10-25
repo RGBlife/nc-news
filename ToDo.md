@@ -16,7 +16,7 @@
 
 ## Show created date by mins | hours | days | years ago when created compared to current date
 - [x] Util function to compare current date / created date and return the relevant amount of unit to render on the page
-- [ ] Adjust design for the date unit
+- [x] Adjust design for the date unit
 
 ## Show loading spinner & show error component if needed
 - [ ] Declare a loading / error state with useContext that can be accessed everywhere
@@ -29,6 +29,11 @@
 - [x] Render data in the page
 - [x] Design the page with the data, this will have the article content and then Article info as a sidebar
 - [x] Add Footer
+
+
+## CommentAdder
+- [ ] Create a full width element with "Leave your comment here", onFocus, return textarea to submit your comment
+- [ ] Close the textarea once submitted or clicked on the X button
 
 
 
