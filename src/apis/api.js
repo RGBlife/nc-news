@@ -42,6 +42,7 @@ const api = {
       body,
       username,
     });
+    console.log(insertedComment);
     return insertedComment;
   },
 };

@@ -1,11 +1,12 @@
 import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
-import Comment from "./Comment";
+import Comments from "./Comments";
 import CommentAdder from "./CommentAdder";
 import { postCommentByArticleId } from "../apis/api";
 
 const CommentsSection = ({ article_id, user }) => {
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,29 +26,33 @@ const CommentsSection = ({ article_id, user }) => {
         setIsLoading(false);
       }
     };
+
     fetchComments();
+
     return () => {
       controller.abort();
     };
   }, []);
 
-  const addComment = (text) => {
-    console.log(text);
+  useEffect(() => {
+    if (!newComment || Object.keys(newComment).length === 0) return;
 
-    postCommentByArticleId(article_id, user, text)
-      .then((data) => {
-        console.log(data);
+    postCommentByArticleId(article_id, user, newComment)
+      .then((formattedComment) => {
+        setComments([formattedComment, ...comments]);
       })
       .catch(() => {});
-  };
+  }, [newComment]);
 
-  if (isLoading) return <p>Loading</p>;
+  if (isLoading) return <p>Loading...</p>;
+  console.log(comments);
   return (
     <section className="flex flex-col">
-      <CommentAdder submitLabel="Write" handleSubmit={addComment} />
-      {comments.map((comment) => {
-        return <Comment key={comment.comment_id} comment={comment} />;
-      })}
+      <CommentAdder submitLabel="Write" setNewComment={setNewComment} />
+      <div>
+      <Comments comments={comments} />
+      </div>
+      
     </section>
   );
 };

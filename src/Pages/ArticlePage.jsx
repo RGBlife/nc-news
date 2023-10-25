@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getArticleById } from "../apis/api";
 import { timeDiffToCurrentDate } from "../utils/utils";
-import Footer from "../layouts/Footer";
 import CommentsSection from "../components/CommentsSection";
 import Voting from "../components/Voting";
 
@@ -62,11 +61,10 @@ const ArticlePage = () => {
       </section>
       <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
         <Voting votes={article.votes} article_id={article_id} />
-        <p className="text-14">Comments: {article.comment_count}</p>
+        <p className="text-[#9ea3a8] flex-col m-2 text-12 p-1 w-auto font-semibold align-center flex justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">Comments {article.comment_count}</p>
       </section>
       
       <CommentsSection article_id={article_id} user="tickle122"/>
-      <Footer />
     </article>
   );
 };

@@ -1,26 +1,31 @@
 import { useState } from "react";
 
-const CommentAdder = ({ handleSubmit, submitLabel }) => {
-  const [text, setText] = useState("");
-  const isTextareaDisabled = text.length === 0;
+const CommentAdder = ({ setNewComment, submitLabel }) => {
+  const [commentInput, setCommentInput] = useState("");
+  const isTextareaDisabled = commentInput.length === 0;
 
   const onSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(text);
-    setText("");
+    setNewComment(commentInput);
+    setCommentInput("");
   };
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col">
+    <form onSubmit={onSubmit} className="flex flex-col m-[6px] rounded-sm">
       <textarea
-      placeholder="Write your comment here..."
-      className="placeholder:italic placeholder:text-slate-400"
-        value={text}
+        placeholder="Write your comment here..."
+        className="placeholder:italic placeholder:text-slate-400"
+        value={commentInput}
         onChange={(event) => {
-          setText(event.target.value);
+            setCommentInput(event.target.value);
         }}
       />
-      <button className="hover:bg-violet-300 block w-full text-sm text-slate-500" disabled={isTextareaDisabled}>{submitLabel}</button>
+      <button
+        className="hover:bg-violet-300 block w-full text-sm text-slate-500"
+        disabled={isTextareaDisabled}
+      >
+        {submitLabel}
+      </button>
     </form>
   );
 };
