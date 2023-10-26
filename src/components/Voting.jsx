@@ -28,7 +28,7 @@ const Voting = ({votes, article_id}) => {
 
 
   return (
-    <div className="p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">
+    <div className="m-2 p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">
       <button
         disabled={adjustVote === 1}
         onClick={() => {

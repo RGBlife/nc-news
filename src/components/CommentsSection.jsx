@@ -1,12 +1,16 @@
 import { getCommentsByArticleId } from "../apis/api";
 import { useState, useEffect } from "react";
-import Comment from "./Comment";
+import Comments from "./Comments";
 import CommentAdder from "./CommentAdder";
 import { postCommentByArticleId } from "../apis/api";
+import Error from "./Error";
 
-const CommentsSection = ({ article_id, user }) => {
+const CommentsSection = ({ article_id, user, setCommentsAmount }) => {
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
+  const [postError, setPostError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -21,33 +25,63 @@ const CommentsSection = ({ article_id, user }) => {
         );
         setComments(response);
       } catch (error) {
+        if (error.code !== "ERR_CANCELED") {
+          setFetchError("Failed to fetch comments.");
+          setIsLoading(false);
+        }
       } finally {
         setIsLoading(false);
       }
     };
+
     fetchComments();
+
     return () => {
       controller.abort();
     };
   }, []);
 
-  const addComment = (text) => {
-    console.log(text);
+  useEffect(() => {
+    setPostError(null);
+    setIsLoading(true);
+    if (!newComment || Object.keys(newComment).length === 0) return;
 
-    postCommentByArticleId(article_id, user, text)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch(() => {});
-  };
+    const updateCommentByArticleId = async () => {
+      setIsLoading(true);
+      if (!newComment || Object.keys(newComment).length === 0) return;
 
-  if (isLoading) return <p>Loading</p>;
+      try {
+        const formattedComment = await postCommentByArticleId(
+          article_id,
+          user,
+          newComment
+        );
+        setComments([formattedComment, ...comments]);
+        setCommentsAmount((prevAmount) => {
+          return Number(prevAmount) + 1;
+        });
+      } catch (error) {
+        setPostError("Failed to post comment, try again later.");
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    updateCommentByArticleId();
+  }, [newComment]);
+
+  if (isLoading && comments.length === 0) return <p>Loading...</p>;
+  if (fetchError && comments.length === 0)
+    return <Error message={fetchError} />;
+
   return (
     <section className="flex flex-col">
-      <CommentAdder submitLabel="Write" handleSubmit={addComment} />
-      {comments.map((comment) => {
-        return <Comment key={comment.comment_id} comment={comment} />;
-      })}
+      <CommentAdder submitLabel="Write" setNewComment={setNewComment} />
+      <div>
+        {isLoading ? <p>Loading...</p> : null}
+        {postError && !fetchError ? <Error message={postError} /> : null}
+        <Comments comments={comments} />
+      </div>
     </section>
   );
 };

@@ -34,6 +34,9 @@
 ## CommentAdder
 - [ ] Create a full width element with "Leave your comment here", onFocus, return textarea to submit your comment
 - [ ] Close the textarea once submitted or clicked on the X button
+- [ ] Add infinite scroll
+- [ ] Update "Comments" state to increment comment count
+- [ ] 
 
 
 
