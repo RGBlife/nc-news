@@ -4,12 +4,15 @@ import { getArticleById } from "../apis/api";
 import { timeDiffToCurrentDate } from "../utils/utils";
 import CommentsSection from "../components/CommentsSection";
 import Voting from "../components/Voting";
+import Error from "../components/Error";
+import CommentsCounter from "../components/CommentsCounter";
 
 const ArticlePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
+  const [commentsAmount, setCommentsAmount] = useState(0)
 
   useEffect(() => {
     const controller = new AbortController();
@@ -20,6 +23,7 @@ const ArticlePage = () => {
       try {
         const response = await getArticleById(article_id, controller.signal);
         setArticle(response);
+        setCommentsAmount(response.comment_count)
       } catch (error) {
         if (error.code !== "ERR_CANCELED") setIsError(true);
       } finally {
@@ -36,7 +40,7 @@ const ArticlePage = () => {
   if (isLoading || article.votes === undefined) return <h1>Loading...</h1>;
   if (isError)
     return (
-      <h1>Error with fetching Articles, please try again later. {isError}</h1>
+      <Error message={"Error with fetching Article, please try again later."} />
     );
 
   return (
@@ -61,10 +65,10 @@ const ArticlePage = () => {
       </section>
       <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
         <Voting votes={article.votes} article_id={article_id} />
-        <p className="text-[#9ea3a8] flex-col m-2 text-12 p-1 w-auto font-semibold align-center flex justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">Comments {article.comment_count}</p>
+        <CommentsCounter commentsAmount={commentsAmount}/>
       </section>
-      
-      <CommentsSection article_id={article_id} user="tickle122"/>
+
+      <CommentsSection article_id={article_id} setCommentsAmount={setCommentsAmount} user="tickle122" />
     </article>
   );
 };

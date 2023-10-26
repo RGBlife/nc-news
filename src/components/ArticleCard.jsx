@@ -1,6 +1,7 @@
 import { timeDiffToCurrentDate } from "../utils/utils";
 import { Link } from "react-router-dom";
 import Voting from "./Voting";
+import CommentsCounter from "./CommentsCounter";
 
 const ArticleCard = ({ article }) => {
   return (
@@ -30,10 +31,7 @@ const ArticleCard = ({ article }) => {
         <div className="mt-4 flex justify-center gap-5 mb-4">
           <Voting votes={article.votes} article_id={article.article_id} />
           <Link to={`/articles/${article.article_id}`}>
-            <div className="text-14 flex flex-col text-center">
-              <p>Comments </p>
-              <p>{article.comment_count}</p>
-            </div>
+            <CommentsCounter commentsAmount={article.comment_count}/>
           </Link>
         </div>
       </section>
