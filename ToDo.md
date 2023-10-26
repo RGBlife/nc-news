@@ -1,11 +1,17 @@
 # To do list
 
 ## Design
-- [ ] Article card text and layout needs adjustment so that content fits and image is larger to cover more of the container on Desktop, smaller on Mobile view.
-- [ ] On article card, add up and bottom arrows on the voting that will later be used
+- [x] Article card text and layout needs adjustment so that content fits and image is larger to cover more of the container on Desktop, smaller on Mobile view.
+- [x] On article card, add up and bottom arrows on the voting that will later be used
 - [ ] NavBar needs more adjustments, there's too much NavBar height
 - [ ] Add grow transitions to NavBar buttons
 - [ ] Add Light / Dark mode if I have any time through useContext
+
+## Styling
+- [ ] Company logo section and nav section text doesn't line up properly, needs to look into and line them up
+- [ ] Article page needs some more love along with the comments section / comment adder, comments needs sections and spread out the text on desktop view.
+- [ ] Navbar has too much spacing on desktop view
+
 
 ## Infinite Scroll
 - [x] Page refreshes
@@ -36,7 +42,9 @@
 - [ ] Close the textarea once submitted or clicked on the X button
 - [ ] Add infinite scroll
 - [ ] Update "Comments" state to increment comment count
-- [ ] 
+
+## Bugs
+- [ ] When going to coding topic http://localhost:5173/articles?topic=coding, it sometimes skips the first page and only shows the second page.
 
 
 

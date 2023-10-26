@@ -2,6 +2,7 @@ import { getArticles } from "../apis/api";
 import { useState, useEffect } from "react";
 import { isScrolledToBottom } from "../utils/utils";
 import ArticleCard from "../components/ArticleCard";
+import { useSearchParams } from "react-router-dom";
 
 const ArticlesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,6 +10,14 @@ const ArticlesPage = () => {
   const [articlesList, setArticlesList] = useState([]);
   const [page, setPage] = useState(1);
   const [endOfList, setEndOfList] = useState(false);
+  let [searchParams, setSearchParams] = useSearchParams();
+  let topic = searchParams.get("topic");
+
+  useEffect(() => {
+    setArticlesList([]);
+    setEndOfList(false);
+    setPage(1);
+  }, [topic]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -18,9 +27,14 @@ const ArticlesPage = () => {
       setIsLoading(true);
 
       try {
-        const response = await getArticles(page, controller.signal);
+        const response = await getArticles(
+          page,
+          controller.signal,
+          topic || ""
+        );
         if (response.length === 0) setEndOfList(true);
         setArticlesList((prevArticles) => [...prevArticles, ...response]);
+        setIsError(false);
       } catch (error) {
         if (error.code !== "ERR_CANCELED") setIsError(true);
       } finally {
@@ -32,7 +46,7 @@ const ArticlesPage = () => {
     return () => {
       controller.abort();
     };
-  }, [page]);
+  }, [page, searchParams]);
 
   useEffect(() => {
     const handleScroll = () => {

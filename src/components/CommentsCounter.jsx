@@ -1,5 +1,4 @@
 const CommentsCounter = ({ commentsAmount }) => {
-  console.log(commentsAmount);
   return (
     <div className="m-2 p-1 font-semibold align-center border-solid border-2 border-[#d5dbe0] rounded-2xl w-[100px] h-[52px] flex flex-row justify-center items-center">
       <svg

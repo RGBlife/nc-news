@@ -28,3 +28,11 @@ export const timeDiffToCurrentDate = (createdAt) => {
   }
 };
 
+export const capitaliseFirstLetter = (string) => {
+    return `${string[0].toUpperCase()}${string.slice(1)}`;
+} 
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
