@@ -5,11 +5,12 @@ const request = axios.create({
 });
 
 const api = {
-  getArticles: async (page = 1, signal) => {
+  getArticles: async (page = 1, signal, topic = "") => {
     const {
       data: { articles },
-    } = await request.get(`articles?p=${page}`, { signal: signal });
-
+    } = await request.get(`articles?p=${page}&topic=${topic}`, {
+      signal: signal,
+    });
     return articles;
   },
 
@@ -44,6 +45,13 @@ const api = {
     });
     return insertedComment;
   },
+
+  getTopics: async () => {
+    const {
+      data: { topics },
+    } = await request.get(`topics`);
+    return topics;
+  },
 };
 
 const artificialSleep = (requests) => {
@@ -71,12 +79,14 @@ const {
   getCommentsByArticleId,
   patchArticleById,
   postCommentByArticleId,
+  getTopics,
 } = artificialSleep({
   getArticles: api.getArticles,
   getArticleById: api.getArticleById,
   getCommentsByArticleId: api.getCommentsByArticleId,
   patchArticleById: api.patchArticleById,
   postCommentByArticleId: api.postCommentByArticleId,
+  getTopics: api.getTopics,
 });
 
 export {
@@ -85,4 +95,5 @@ export {
   getCommentsByArticleId,
   patchArticleById,
   postCommentByArticleId,
+  getTopics,
 };

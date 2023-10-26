@@ -12,7 +12,7 @@ const ArticlePage = () => {
   const [isError, setIsError] = useState(false);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [commentsAmount, setCommentsAmount] = useState(0)
+  const [commentsAmount, setCommentsAmount] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -23,7 +23,7 @@ const ArticlePage = () => {
       try {
         const response = await getArticleById(article_id, controller.signal);
         setArticle(response);
-        setCommentsAmount(response.comment_count)
+        setCommentsAmount(response.comment_count);
       } catch (error) {
         if (error.code !== "ERR_CANCELED") setIsError(true);
       } finally {
@@ -65,10 +65,14 @@ const ArticlePage = () => {
       </section>
       <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
         <Voting votes={article.votes} article_id={article_id} />
-        <CommentsCounter commentsAmount={commentsAmount}/>
+        <CommentsCounter commentsAmount={commentsAmount} />
       </section>
 
-      <CommentsSection article_id={article_id} setCommentsAmount={setCommentsAmount} user="tickle122" />
+      <CommentsSection
+        article_id={article_id}
+        setCommentsAmount={setCommentsAmount}
+        user="tickle122"
+      />
     </article>
   );
 };

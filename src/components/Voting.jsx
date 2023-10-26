@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { patchArticleById } from "../apis/api";
+import Error from "./Error";
 
-const Voting = ({votes, article_id}) => {
+const Voting = ({ votes, article_id }) => {
   const [adjustVote, setAdjustVote] = useState(0);
   const [VoteColour, setVoteColour] = useState("#83878c");
+  const [isError, setIsError] = useState(false);
 
   const handleVotes = (value) => {
     const newVote = adjustVote + value;
+    setIsError(false);
     setAdjustVote(newVote);
 
     setVoteColour(() => {
@@ -20,12 +23,11 @@ const Voting = ({votes, article_id}) => {
     });
 
     patchArticleById(value, article_id).catch(() => {
+      setIsError(true);
       setAdjustVote(0);
       setVoteColour("#83878c");
     });
   };
-
-
 
   return (
     <div className="m-2 p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">
@@ -72,6 +74,11 @@ const Voting = ({votes, article_id}) => {
           />
         </svg>
       </button>
+      {isError ? (
+        <Error
+          message={"Unable to update votes"}
+        />
+      ) : null}
     </div>
   );
 };
