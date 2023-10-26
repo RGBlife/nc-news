@@ -28,8 +28,3 @@ export const timeDiffToCurrentDate = (createdAt) => {
   }
 };
 
-export const sortCommentsNewestFirst = (comments) => {
-  return comments.sort((a, b) => {
-    return new Date(b.created_at) - new Date(a.created_at);
-  });
-};
