@@ -40,7 +40,7 @@ const FilterCard = ({ setSearchParams, searchParams }) => {
         onChange={(event) => handleChange("order", event.target.value)}
       >
         <option disabled value="">
-          Order
+          Order By
         </option>
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>

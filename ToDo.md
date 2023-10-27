@@ -46,10 +46,13 @@
 ## Topics Dropdown
 - [ ] Unable to select the existing option from the dropdown, might not be an issue as you can go back a page instead of selecting the topic again
 - [ ] Reset the dropdown to default option when going to the homepage or when selecting an article (better change change the dropdown according to which article you are on)
+- [ ] Sort topic options alphabetically 
+- [ ] 
 
 ## FilterCard
 - [ ] Reset when going back to the home page
 - [ ] Ability to reset filters that have already been applied OR have a default filter
+- [ ] If user selects "Order By" option without selecting a filter, default to "Date" as this is the default API filter is ordered by
 
 ## Bugs
 - [ ] When going to coding topic http://localhost:5173/articles?topic=coding, it sometimes skips the first page and only shows the second page.
