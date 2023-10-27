@@ -5,10 +5,29 @@ const request = axios.create({
 });
 
 const api = {
-  getArticles: async (page = 1, signal, topic = "") => {
+  getArticles: async (
+    page = 1,
+    signal,
+    topic = "",
+    sortBy = "created_at",
+    order = "desc"
+  ) => {
+    const params = {
+      p: page,
+      topic,
+      sortBy,
+      order,
+    };
+
     const {
       data: { articles },
-    } = await request.get(`articles?p=${page}&topic=${topic}`, {
+    } = await request.get(`articles`, {
+      params: {
+        p: page,
+        topic,
+        sortBy,
+        order,
+      },
       signal: signal,
     });
     return articles;
