@@ -8,12 +8,12 @@
 - [ ] Add Light / Dark mode if I have any time through useContext
 
 ## Styling
-- [ ] Company logo section and nav section text doesn't line up properly, needs to look into and line them up
+- [x] Company logo section and nav section text doesn't line up properly, needs to look into and line them up
 - [ ] Article page needs some more love along with the comments section / comment adder, comments needs sections and spread out the text on desktop view.
 - [ ] Navbar has too much spacing on desktop view
 
 
-## Infinite Scroll
+## Infinite Scroll for Home page
 - [x] Page refreshes
 - [x] Attempts to fetch more data even though all the data has been retrieved
 - [x] Initial load it duplicates first batch of articles
@@ -41,7 +41,11 @@
 - [ ] Create a full width element with "Leave your comment here", onFocus, return textarea to submit your comment
 - [ ] Close the textarea once submitted or clicked on the X button
 - [ ] Add infinite scroll
-- [ ] Update "Comments" state to increment comment count
+- [x] Update "Comments" state to increment comment count
+
+## Topics Dropdown
+- [ ] Unable to select the existing option from the dropdown, might not be an issue as you can go back a page instead of selecting the topic again
+- [ ] Reset the dropdown to default option when going to the homepage or when selecting an article (better change change the dropdown according to which article you are on)
 
 ## Bugs
 - [ ] When going to coding topic http://localhost:5173/articles?topic=coding, it sometimes skips the first page and only shows the second page.

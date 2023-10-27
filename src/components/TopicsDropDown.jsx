@@ -38,10 +38,11 @@ const TopicsDropDown = () => {
   };
 
   return (
-    <li>
+    <li className="flex">
       <select
         onChange={handleChange}
         className=" text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75 appearance-none bg-transparent border-none leading-tight focus:outline-none focus:shadow-outline"
+      aria-label="Topic selector dropdown"
       >
         <option defaultValue="">All Topics</option>
         {topicOptions.map((topicOption) => {
