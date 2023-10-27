@@ -32,6 +32,7 @@ const Voting = ({ votes, article_id }) => {
   return (
     <div className="m-2 p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">
       <button
+      aria-label="upvote"
         disabled={adjustVote === 1}
         onClick={() => {
           handleVotes(1);
@@ -55,6 +56,7 @@ const Voting = ({ votes, article_id }) => {
         {votes + adjustVote}
       </span>
       <button
+      aria-label="downvote"
         disabled={adjustVote === -1}
         onClick={() => {
           handleVotes(-1);

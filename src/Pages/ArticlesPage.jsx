@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { isScrolledToBottom } from "../utils/utils";
 import ArticleCard from "../components/ArticleCard";
 import { useSearchParams } from "react-router-dom";
+import FilterCard from "../components/FilterCard";
 
 const ArticlesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,13 +12,16 @@ const ArticlesPage = () => {
   const [page, setPage] = useState(1);
   const [endOfList, setEndOfList] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
-  let topic = searchParams.get("topic");
+
+  const sortBy = searchParams.get("sortBy") || "created_at";
+  const order = searchParams.get("order") || "desc";
+  const topic = searchParams.get("topic") || "";
 
   useEffect(() => {
     setArticlesList([]);
     setEndOfList(false);
     setPage(1);
-  }, [topic]);
+  }, [searchParams]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -30,7 +34,9 @@ const ArticlesPage = () => {
         const response = await getArticles(
           page,
           controller.signal,
-          topic || ""
+          topic,
+          sortBy,
+          order
         );
         if (response.length === 0) setEndOfList(true);
         setArticlesList((prevArticles) => [...prevArticles, ...response]);
@@ -62,17 +68,21 @@ const ArticlesPage = () => {
     };
   }, [isLoading]);
 
-  if (isLoading && articlesList.length === 0) return <h1>Loading</h1>;
-  if (isError)
-    return (
-      <h1>Error with fetching Articles, please try again later. {isError}</h1>
-    );
 
   return (
     <div className="flex flex-col gap-3 items-center">
-      {articlesList.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
-      })}
+      <FilterCard setSearchParams={setSearchParams} searchParams={searchParams}/>
+      <>
+        {isLoading && articlesList.length === 0 ? <h1>Loading</h1> : null}
+        {isError ? (
+          <h1>
+            Error with fetching Articles, please try again later. {isError}
+          </h1>
+        ) : null}
+        {articlesList.map((article) => {
+          return <ArticleCard key={article.article_id} article={article} />;
+        })}
+      </>
     </div>
   );
 };
