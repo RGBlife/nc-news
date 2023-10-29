@@ -68,19 +68,13 @@ Article Hub is a simple, evolving project created to apply and showcase my skill
 
 <div align="left">
 
-<p><a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a></p>
-
-<p><a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS" /></a></p>
-
-<p><a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a></p>
-
-<p><a href="https://axios-http.com/"><img src="https://img.shields.io/badge/axios-61DAFB?style=for-the-badge&logo=javascript&logoColor=white" alt="axios" /></a></p>
-
-<p><a href="https://www.framer.com/api/motion/"><img src="https://img.shields.io/badge/framer--motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="framer-motion" /></a></p>
-
-<p><a href="https://reactrouter.com/"><img src="https://img.shields.io/badge/react--router--dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="react-router-dom" /></a></p>
-
-<p><a href="https://react-select.com/"><img src="https://img.shields.io/badge/react--select-FF7F00?style=for-the-badge&logo=react&logoColor=white" alt="react-select" /></a></p>
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![axios](https://img.shields.io/badge/axios-61DAFB?style=for-the-badge&logo=javascript&logoColor=white)](https://axios-http.com/)
+[![framer-motion](https://img.shields.io/badge/framer--motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/api/motion/)
+[![react-router-dom](https://img.shields.io/badge/react--router--dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![react-select](https://img.shields.io/badge/react--select-FF7F00?style=for-the-badge&logo=react&logoColor=white)](https://react-select.com/)
 
 **API**: A custom API created for serving articles and related functionalities. It can be found [here](https://github.com/RGBlife/news-api).
 
@@ -130,13 +124,14 @@ Before you begin, ensure you have met the following requirements:
 
 <div align="left">
 
-- [ ] Implement Light/Dark mode toggle.
-- [ ] Enhancements to the article page and comments section.
-- [ ] Implement infinite scrolling in the comments section.
-- [ ] Add user login/profile functionalities, including avatar uploads.
-- [ ] Develop features for adding articles and topics.
-- [ ] Enhancements to the topics dropdown for a more intuitive user experience.
-- [ ] Implement a global loading/error state using context for improved user feedback.
+- [ ] Caching requests to avoid unnecessary network calls
+- [ ] Implement Light/Dark mode toggle
+- [ ] Enhancements to the article page and comments section
+- [ ] Implement infinite scrolling in the comments section
+- [ ] Add user login/profile functionalities, including avatar uploads
+- [ ] Develop features for adding articles and topics
+- [ ] Enhancements to the topics dropdown for a more intuitive user experience
+- [ ] Implement a global loading/error state using context for improved user feedback
 
 </div>
 
