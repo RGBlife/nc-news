@@ -4,6 +4,7 @@ import { isScrolledToBottom } from "../utils/utils";
 import ArticleCard from "../components/ArticleCard";
 import { useSearchParams } from "react-router-dom";
 import FilterCard from "../components/FilterCard";
+import ScrollToTop from "../layouts/ScrollToTop";
 
 const ArticlesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,10 +69,12 @@ const ArticlesPage = () => {
     };
   }, [isLoading]);
 
-
   return (
     <div className="flex flex-col gap-3 items-center">
-      <FilterCard setSearchParams={setSearchParams} searchParams={searchParams}/>
+      <FilterCard
+        setSearchParams={setSearchParams}
+        searchParams={searchParams}
+      />
       <>
         {isLoading && articlesList.length === 0 ? <h1>Loading</h1> : null}
         {isError ? (
@@ -82,6 +85,7 @@ const ArticlesPage = () => {
         {articlesList.map((article) => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}
+        <ScrollToTop /> 
       </>
     </div>
   );

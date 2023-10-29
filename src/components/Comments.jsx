@@ -1,10 +1,46 @@
 import { timeDiffToCurrentDate } from "../utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
+import DeleteComment from "./DeleteComment";
+import { useState } from "react";
+import { deleteCommentRequest } from "../apis/api";
+import { clearStateAfterTimeout } from "../utils/utils";
 
-const Comments = ({ comments }) => {
-  const noCommentMsg = <h1 className="h-10 flex items-center justify-center border-2 border-solid m-2">No comment here yet! Be the first one!</h1>;
+const Comments = ({ comments, triggerRefresh }) => {
+  const [deleteError, setDeleteError] = useState({});
+  const [deletionInProgress, setDeletionInProgress] = useState({});
+  const noCommentMsg = (
+    <h1 className="h-10 flex items-center justify-center border-2 border-solid m-2">
+      No comment here yet! Be the first one!
+    </h1>
+  );
 
-  console.log(comments);
+  const handleDelete = async (commentId) => {
+    setDeletionInProgress((prevState) => ({
+      ...prevState,
+      [commentId]: { loadingDelete: true, deleteSuccessful: false },
+    }));
+
+    try {
+      const deletedComment = await deleteCommentRequest(commentId);
+      setDeletionInProgress((prevState) => ({
+        ...prevState,
+        [commentId]: { loadingDelete: false, deleteSuccessful: true },
+      }));
+      triggerRefresh();
+    } catch (error) {
+      setDeleteError((prevState) => ({ ...prevState, [commentId]: true }));
+      setDeletionInProgress((prevState) => ({
+        ...prevState,
+        [commentId]: { loadingDelete: false, deleteSuccessful: false },
+      }));
+
+      clearStateAfterTimeout(setDeleteError, commentId, 5000);
+    }
+  };
+
+  // Hard coded for now... (useContext for the logged in user if enough time)
+  const currentUser = "tickle122";
+
   return (
     <>
       {comments.length === 0 ? (
@@ -34,6 +70,24 @@ const Comments = ({ comments }) => {
                   </span>
                   <p>{comment.body}</p>
                   <p>Votes: {comment.votes}</p>
+
+                  {comment.author === currentUser ? (
+                    <DeleteComment
+                      triggerRefresh={triggerRefresh}
+                      commentId={comment.comment_id}
+                      deletionInProgress={
+                        deletionInProgress[comment.comment_id] || {
+                          loadingDelete: false,
+                          deleteSuccessful: false,
+                        }
+                      }
+                      handleDelete={() => handleDelete(comment.comment_id)}
+                      setDeletionInProgress={setDeletionInProgress}
+                    />
+                  ) : null}
+                  {deleteError[comment.comment_id] ? (
+                    <p className="text-red-600">Error deleting comment. Please try again.</p>
+                  ) : null}
                 </div>
               </motion.div>
             );

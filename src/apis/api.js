@@ -71,6 +71,13 @@ const api = {
     } = await request.get(`topics`);
     return topics;
   },
+
+  deleteCommentRequest: async (commentId) => {
+    const {
+      status,
+    } = await request.delete(`comments/${commentId}`);
+    return status;
+  },
 };
 
 const artificialSleep = (requests) => {
@@ -99,6 +106,7 @@ const {
   patchArticleById,
   postCommentByArticleId,
   getTopics,
+  deleteCommentRequest,
 } = artificialSleep({
   getArticles: api.getArticles,
   getArticleById: api.getArticleById,
@@ -106,6 +114,7 @@ const {
   patchArticleById: api.patchArticleById,
   postCommentByArticleId: api.postCommentByArticleId,
   getTopics: api.getTopics,
+  deleteCommentRequest: api.deleteCommentRequest,
 });
 
 export {
@@ -115,4 +124,5 @@ export {
   patchArticleById,
   postCommentByArticleId,
   getTopics,
+  deleteCommentRequest,
 };
