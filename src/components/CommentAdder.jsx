@@ -28,7 +28,7 @@ const CommentAdder = ({ setNewComment, submitLabel }) => {
         onKeyDown={handleKeyDown}
       />
       <button
-        className="hover:bg-violet-300 block w-full text-sm text-slate-500"
+        className="hover:bg-violet-300 bg-[#efefed] block w-full text-sm text-slate-500"
         disabled={isTextareaDisabled}
       >
         {submitLabel}

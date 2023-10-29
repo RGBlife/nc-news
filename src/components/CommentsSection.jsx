@@ -83,7 +83,7 @@ const CommentsSection = ({ article_id, user, setCommentsAmount }) => {
 
   return (
     <section className="flex flex-col">
-      <CommentAdder submitLabel="Write" setNewComment={setNewComment} />
+      <CommentAdder submitLabel="Add Comment" setNewComment={setNewComment} />
       <div>
         {isLoading ? <p>Loading...</p> : null}
         {postError && !fetchError ? <Error message={postError} /> : null}

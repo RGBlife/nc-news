@@ -4,6 +4,8 @@ import DeleteComment from "./DeleteComment";
 import { useState } from "react";
 import { deleteCommentRequest } from "../apis/api";
 import { clearStateAfterTimeout } from "../utils/utils";
+import { useUser } from "./UserContext";
+import Voting from "./Voting";
 
 const Comments = ({ comments, triggerRefresh }) => {
   const [deleteError, setDeleteError] = useState({});
@@ -38,8 +40,7 @@ const Comments = ({ comments, triggerRefresh }) => {
     }
   };
 
-  // Hard coded for now... (useContext for the logged in user if enough time)
-  const currentUser = "tickle122";
+  const currentUser = useUser();
 
   return (
     <>
@@ -56,7 +57,7 @@ const Comments = ({ comments, triggerRefresh }) => {
                 key={comment.comment_id}
               >
                 <div className="py-4 px-2 flex flex-col border-solid rounded-md border-[1px] border-sky-500 m-2">
-                  <div>
+                  <div className="mb-1">
                     <img
                       alt="Placeholder Avatar"
                       src="https://api.iconify.design/clarity/avatar-line.svg?color=%239ea3a8&width=24&height=24"
@@ -69,24 +70,28 @@ const Comments = ({ comments, triggerRefresh }) => {
                     )} ago`}</p>
                   </span>
                   <p>{comment.body}</p>
-                  <p>Votes: {comment.votes}</p>
-
-                  {comment.author === currentUser ? (
-                    <DeleteComment
-                      triggerRefresh={triggerRefresh}
-                      commentId={comment.comment_id}
-                      deletionInProgress={
-                        deletionInProgress[comment.comment_id] || {
-                          loadingDelete: false,
-                          deleteSuccessful: false,
+                  <ol className="flex gap-10 justify-center items-center">
+                    <li className="text-[#83878c] m-2 p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">Votes: {comment.votes}</li>
+                    {comment.author === currentUser ? (
+                      <DeleteComment
+                        triggerRefresh={triggerRefresh}
+                        commentId={comment.comment_id}
+                        deletionInProgress={
+                          deletionInProgress[comment.comment_id] || {
+                            loadingDelete: false,
+                            deleteSuccessful: false,
+                          }
                         }
-                      }
-                      handleDelete={() => handleDelete(comment.comment_id)}
-                      setDeletionInProgress={setDeletionInProgress}
-                    />
-                  ) : null}
+                        handleDelete={() => handleDelete(comment.comment_id)}
+                        setDeletionInProgress={setDeletionInProgress}
+                      />
+                    ) : null}
+                  </ol>
+
                   {deleteError[comment.comment_id] ? (
-                    <p className="text-red-600">Error deleting comment. Please try again.</p>
+                    <p className="text-red-600">
+                      Error deleting comment. Please try again.
+                    </p>
                   ) : null}
                 </div>
               </motion.div>

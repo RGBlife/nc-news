@@ -22,7 +22,7 @@ const DeleteComment = ({ handleDelete, deletionInProgress, commentId, triggerRef
   }, [deletionInProgress.deleteSuccessful]);
 
   return (
-    <>
+    <li>
       <button
         onClick={() => {
           handleDelete(commentId);
@@ -33,7 +33,7 @@ const DeleteComment = ({ handleDelete, deletionInProgress, commentId, triggerRef
       </button>
       {deletionInProgress.loadingDelete ? <p>Loading...</p> : null}
       {showSuccessMessage ? <p className="text-green-600">Comment deleted successfully!</p> : null}
-    </>
+    </li>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { patchArticleById } from "../apis/api";
 import Error from "./Error";
 
