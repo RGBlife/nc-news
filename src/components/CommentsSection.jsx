@@ -11,6 +11,13 @@ const CommentsSection = ({ article_id, user, setCommentsAmount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [postError, setPostError] = useState(null);
+  const [refreshComments, setRefreshComments] = useState(false);
+
+  const triggerRefresh = () => {
+    setRefreshComments((toggle) => {
+      return !toggle;
+    });
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -39,7 +46,7 @@ const CommentsSection = ({ article_id, user, setCommentsAmount }) => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [refreshComments]);
 
   useEffect(() => {
     setPostError(null);
@@ -80,7 +87,7 @@ const CommentsSection = ({ article_id, user, setCommentsAmount }) => {
       <div>
         {isLoading ? <p>Loading...</p> : null}
         {postError && !fetchError ? <Error message={postError} /> : null}
-        <Comments comments={comments} />
+        <Comments comments={comments} triggerRefresh={triggerRefresh} />
       </div>
     </section>
   );

@@ -4,6 +4,12 @@ export const isScrolledToBottom = () => {
   );
 };
 
+export const isScrolledAfterNav = () => {
+  return (
+    window.scrollY > 200
+  );
+};
+
 export const timeDiffToCurrentDate = (createdAt) => {
   const now = new Date();
   const createdDate = new Date(createdAt);
@@ -28,8 +34,15 @@ export const timeDiffToCurrentDate = (createdAt) => {
   }
 };
 
-export const capitaliseFirstLetter = (string) => {
-    return `${string[0].toUpperCase()}${string.slice(1)}`;
-} 
+export const clearStateAfterTimeout = (setStateFunction, commentId, timeoutDuration) => {
+  setTimeout(() => {
+    setStateFunction((prevState) => {
+      const newState = { ...prevState };
+      delete newState[commentId];
+      return newState;
+    });
+  }, timeoutDuration);
+}
+
 
 

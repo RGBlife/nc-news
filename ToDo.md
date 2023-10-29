@@ -35,6 +35,7 @@
 - [x] Render data in the page
 - [x] Design the page with the data, this will have the article content and then Article info as a sidebar
 - [x] Add Footer
+- [ ] Add a back to top of the page floating button when scrolling and the top filters start disappearing
 
 
 ## CommentAdder
