@@ -76,7 +76,13 @@ const ArticlesPage = () => {
         searchParams={searchParams}
       />
       <>
-        {isLoading && articlesList.length === 0 ? <h1>Loading</h1> : null}
+        {isLoading ? (
+          <>
+            <h1>Loading</h1>
+            <span className="loading loading-spinner text-primary"></span>
+          </>
+        ) : null}
+
         {isError ? (
           <h1>
             Error with fetching Articles, please try again later. {isError}
@@ -85,7 +91,7 @@ const ArticlesPage = () => {
         {articlesList.map((article) => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}
-        <ScrollToTop /> 
+        <ScrollToTop />
       </>
     </div>
   );
