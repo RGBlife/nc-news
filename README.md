@@ -32,9 +32,10 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#mobile-screenshot">Mobile Screenshot</a></li>
+        <li><a href="#desktop-screenshot">Desktop Screenshot</li>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#deployed-with">Deployed With</a></li>
+        <li><a href="#deployed-with">Deployed with</a></li>
       </ul>
     </li>
     <li>
@@ -45,8 +46,6 @@
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 

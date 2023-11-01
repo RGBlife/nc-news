@@ -1,8 +1,8 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getTopics } from "../apis/api";
 import Select from "react-select";
-import DropdownIndicator from "./DropdownIndicator";
+import DropdownIndicator from "../components/DropdownIndicator";
 import { customStyles } from "../styles/customStyles";
 import { capitalise } from "../utils/utils";
 
