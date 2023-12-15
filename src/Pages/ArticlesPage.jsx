@@ -5,6 +5,7 @@ import ArticleCard from "../components/ArticleCard";
 import { useSearchParams } from "react-router-dom";
 import FilterCard from "../components/FilterCard";
 import ScrollToTop from "../layouts/ScrollToTop";
+import { Audio } from "react-loader-spinner";
 
 const ArticlesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +81,16 @@ const ArticlesPage = () => {
           <>
             <h1>Loading</h1>
             <span className="loading loading-spinner text-primary"></span>
+
+            <Audio
+              height="80"
+              width="80"
+              radius="9"
+              color="green"
+              ariaLabel="three-dots-loading"
+              wrapperStyle
+              wrapperClass
+            />
           </>
         ) : null}
 

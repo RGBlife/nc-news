@@ -1,4 +1,6 @@
 import TopicsDropDown from "./TopicsDropDown";
+import UserPage from "../Pages/LoginPage";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
@@ -18,14 +20,11 @@ const Nav = () => {
           </a>
         </li>
         <li className="flex items-center">
-          <a
-            onClick={() => {
-              alert("'User profile' feature coming soon");
-            }}
+          <Link to="/login"
             className="lg:text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75"
           >
             User
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
