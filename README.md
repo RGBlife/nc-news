@@ -53,6 +53,8 @@
 
 Article Hub is a simple, evolving project created to apply and showcase my skills as a Trainee Full Stack Developer. It's a platform centred around articles, facilitating reading and user interaction.
 
+This project is part of my portfolio whilst enrolled on the Northcoders Software Development Bootcamp.
+
 ### Mobile Screenshot
 
 <img src="./public/mobileview_iPhoneXR.png" alt="Screenshot of the Article Hub application on an iPhone XR" width="300px">
