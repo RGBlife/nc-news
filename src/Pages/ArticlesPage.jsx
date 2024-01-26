@@ -79,18 +79,14 @@ const ArticlesPage = () => {
       <>
         {isLoading ? (
           <>
-            <h1>Loading</h1>
-            <span className="loading loading-spinner text-primary"></span>
-
-            <Audio
-              height="80"
-              width="80"
-              radius="9"
-              color="green"
-              ariaLabel="three-dots-loading"
-              wrapperStyle
-              wrapperClass
-            />
+            <div className="loading-container">
+              <h1>Loading...</h1>
+              <span className="loading-spinner text-primary"></span>
+              <p className="loading-message">
+                Please be patient, the free-tier server might take up to a
+                minute to wake up.
+              </p>
+            </div>
           </>
         ) : null}
 
