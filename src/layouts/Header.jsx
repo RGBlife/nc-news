@@ -7,7 +7,7 @@ const Header = () => {
       <div className="flex align-center justify-between py-0 lg:px-7 px-1 h-[50px]">
         <Link to="/" className="flex justify-center items-center gap-3 lg:gap-10">
           <img alt="Company Logo" className="h-full w-auto" src="/dblp.svg" />
-          <h1 className="lg:text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75">Home</h1>
+          <h1 className="hidden sm:flex lg:text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75">Home</h1>
         </Link>
         <Nav/>
       </div>

@@ -6,6 +6,7 @@ import CommentsSection from "../components/CommentsSection";
 import Voting from "../components/Voting";
 import Error from "../components/Error";
 import CommentsCounter from "../components/CommentsCounter";
+import { useUser } from "../providers/UserContext";
 
 const ArticlePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +14,14 @@ const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [commentsAmount, setCommentsAmount] = useState(0);
+  const { user } = useUser();
+
+  let username;
+  if (user !== null) {
+    username = user.username;
+  }
+
+  const selectedUser = username || "Login";
 
   useEffect(() => {
     const controller = new AbortController();
@@ -71,7 +80,7 @@ const ArticlePage = () => {
       <CommentsSection
         article_id={article_id}
         setCommentsAmount={setCommentsAmount}
-        user="tickle122"
+        user={selectedUser}
       />
     </article>
   );

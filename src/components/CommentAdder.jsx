@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const CommentAdder = ({ setNewComment, submitLabel }) => {
+const CommentAdder = ({ setNewComment, submitLabel, user }) => {
+  console.log(user);
   const [commentInput, setCommentInput] = useState("");
   const isTextareaDisabled = commentInput.length === 0;
 
@@ -15,6 +17,18 @@ const CommentAdder = ({ setNewComment, submitLabel }) => {
       onSubmit(event);
     }
   };
+
+  if (user === "Login") {
+    return (
+      <p className="text-center text-slate-500">
+        Please{" "}
+        <Link className="text-[#D83367]" to="/login">
+          log in {" "}
+        </Link>
+        to leave a comment.
+      </p>
+    );
+  }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col m-[6px] rounded-sm">
