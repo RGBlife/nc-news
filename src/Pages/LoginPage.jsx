@@ -8,6 +8,7 @@ const LoginPage = () => {
   const { setUser } = useUser();
   const [userList, setUserList] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,11 +30,15 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const userObj = userList.find((user) => user.username === selectedUser);
-    setUser(userObj);
+    if (userObj) {
+      setUser(userObj);
+      setLoginStatus(`You have successfully logged in as ${userObj.username}.`);
+    }
   };
 
   const handleSelectChange = (event) => {
     setSelectedUser(event.target.value); 
+    setLoginStatus("")
   };
 
   return (
@@ -52,6 +57,7 @@ const LoginPage = () => {
       </label>
 
       <Button style={{ backgroundColor: "#D83367", textTransform: "none" }} type="submit" variant="contained">Log in as user</Button>
+      
     </form>
   );
 };

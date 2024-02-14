@@ -5,7 +5,6 @@ import { useState } from "react";
 import { deleteCommentRequest } from "../apis/api";
 import { clearStateAfterTimeout } from "../utils/utils";
 import { useUser } from "../providers/UserContext";
-import Voting from "./Voting";
 
 const Comments = ({ comments, triggerRefresh }) => {
   const [deleteError, setDeleteError] = useState({});
