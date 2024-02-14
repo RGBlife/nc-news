@@ -1,7 +1,6 @@
-import { createContext, useContext } from "react";
-import { useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-const UserContext = createContext(undefined);
+const UserContext = createContext();
 
 export const useUser = () => {
   const context = useContext(UserContext);
@@ -12,12 +11,26 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("tickle122"); // Hardcoded until login functionlity is implemented.
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
+    if (storedUser) {
+      setUser(storedUser);
+    }
   }, []);
 
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };

@@ -1,14 +1,23 @@
 import TopicsDropDown from "./TopicsDropDown";
-import UserPage from "../Pages/LoginPage";
+import { useUser } from "../providers/UserContext";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const { user } = useUser();
+
+  let username;
+  if (user !== null) {
+    username = user.username;
+  }
+
+  const linkText = username || "Login";
+
   return (
     <nav className="flex justify-center items-center">
       <ul className="flex gap-5">
         <TopicsDropDown />
         <li className="flex items-center">
-          <a className="lg:text-[20px] text-[#FFFFFF] font-semibold hover:text-[#50192b]">
+          <a className="text-base  lg:text-[20px] text-[#FFFFFF] font-semibold hover:text-[#50192b]">
             <button
               onClick={() => {
                 alert("'Add an article / Add a Topic' feature coming soon");
@@ -20,10 +29,11 @@ const Nav = () => {
           </a>
         </li>
         <li className="flex items-center">
-          <Link to="/login"
-            className="lg:text-[20px] text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75"
+          <Link
+            to="/login"
+            className="text-base  lg:text-[20px] mr-1 text-[#D83367] font-semibold hover:text-[#50192b] transition delay-75"
           >
-            User
+            {linkText}
           </Link>
         </li>
       </ul>
