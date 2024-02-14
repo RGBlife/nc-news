@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CommentAdder = ({ setNewComment, submitLabel, user }) => {
-  console.log(user);
   const [commentInput, setCommentInput] = useState("");
   const isTextareaDisabled = commentInput.length === 0;
 

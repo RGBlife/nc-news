@@ -53,13 +53,13 @@ const ArticlePage = () => {
     );
 
   return (
-    <article className="flex-1 overflow-y-auto">
+    <article className="flex-1 overflow-y-auto w-3/4 flex flex-col justify-center">
       <section className="flex flex-col border-solid border-2 p-4 shadow-md">
         <div className="flex justify-center text-center mb-4">
           <h2 className="capitalize text-20 font-bold">{article.topic}</h2>
         </div>
         <div className="flex flex-row mb-4">
-          <p className="m-2 text-14">Posted by {article.author}</p>
+          <p className="my-2 mr-2 text-14">Posted by {article.author}</p>
           <p className="m-2 text-14">
             Created {`${timeDiffToCurrentDate(article.created_at)} ago`}
           </p>
@@ -72,7 +72,7 @@ const ArticlePage = () => {
         ></img>
         <p className="text-16">{article.body}</p>
       </section>
-      <section className="mt-4 flex justify-center gap-5 mb-4 border-cyan-500 border-solid border-2">
+      <section className="mt-4 flex justify-center gap-5 mb-4 ">
         <Voting votes={article.votes} article_id={article_id} />
         <CommentsCounter commentsAmount={commentsAmount} />
       </section>

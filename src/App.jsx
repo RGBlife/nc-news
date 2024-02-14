@@ -10,7 +10,7 @@ import { Route, Routes } from "react-router-dom";
 function App() {
 
   return (
-    <main className="mt-[80px]">
+    <main className="mt-[80px] flex flex-col justify-center items-center">
       <Header/>
       <Routes>
         <Route path="/" element={<ArticlesPage />} />
