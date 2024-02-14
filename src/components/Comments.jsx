@@ -57,13 +57,14 @@ const Comments = ({ comments, triggerRefresh }) => {
                 key={comment.comment_id}
               >
                 <div className="py-4 px-2 flex flex-col border-solid rounded-md border-[1px] border-sky-500 m-2">
+                <span className="flex gap-2 mb-2">
                   <div className="mb-1">
                     <img
                       alt="Placeholder Avatar"
                       src="https://api.iconify.design/clarity/avatar-line.svg?color=%239ea3a8&width=24&height=24"
                     />
                   </div>
-                  <span className="flex">
+                  
                     <p>{comment.author}</p>
                     <p className="px-2">{`${timeDiffToCurrentDate(
                       comment.created_at
@@ -71,7 +72,7 @@ const Comments = ({ comments, triggerRefresh }) => {
                   </span>
                   <p>{comment.body}</p>
                   <ol className="flex gap-10 justify-center items-center">
-                    <li className="text-[#83878c] m-2 p-1 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">Votes: {comment.votes}</li>
+                    <li className="text-[#83878c] m-2 p-2 w-auto font-semibold align-center flex flex-row justify-center border-solid border-2 border-[#d5dbe0] rounded-2xl">Votes: {comment.votes}</li>
                     {comment.author === currentUser ? (
                       <DeleteComment
                         triggerRefresh={triggerRefresh}
