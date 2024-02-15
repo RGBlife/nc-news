@@ -20,8 +20,8 @@
 }
 
 .loading-spinner {
-  border: 5px solid #FFFFFF;
-  border-top: 5px solid #D83367;
+  border: 5px solid #ffffff;
+  border-top: 5px solid #d83367;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -31,8 +31,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-container {
@@ -40,10 +44,28 @@
   padding: 20px;
 }
 
-
 .loading-message {
-  color: #666; 
+  color: #666;
   font-size: 14px;
   margin-top: 20px;
 }
 
+.login-success-message p {
+  color: #4bb543;
+  background-color: #ebf9f1;
+  border: 1px solid #aeddab;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  display: inline-block;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

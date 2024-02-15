@@ -16,7 +16,7 @@ const LoginPage = () => {
       try {
         const response = await getAllUsers(controller.signal);
         setUserList(response);
-        setSelectedUser(response[0]?.username); 
+        setSelectedUser(response[0]?.username);
       } catch (error) {
         console.log(error);
       }
@@ -37,18 +37,28 @@ const LoginPage = () => {
   };
 
   const handleSelectChange = (event) => {
-    setSelectedUser(event.target.value); 
-    setLoginStatus("")
+    setSelectedUser(event.target.value);
+    setLoginStatus("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 align-middle items-center justify-center">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2 align-middle items-center justify-center"
+    >
       <label htmlFor="userName">
         <h4>Select Your User</h4>
-        <select name="userName" id="userName" value={selectedUser} onChange={handleSelectChange}>
+        <select
+          name="userName"
+          id="userName"
+          value={selectedUser}
+          onChange={handleSelectChange}
+        >
           {userList.length > 0 ? (
             userList.map((person) => (
-              <option key={uuid()} value={person.username}>{person.username}</option>
+              <option key={uuid()} value={person.username}>
+                {person.username}
+              </option>
             ))
           ) : (
             <option>Loading...</option>
@@ -56,8 +66,18 @@ const LoginPage = () => {
         </select>
       </label>
 
-      <Button style={{ backgroundColor: "#D83367", textTransform: "none" }} type="submit" variant="contained">Log in as user</Button>
-      
+      <Button
+        style={{ backgroundColor: "#D83367", textTransform: "none" }}
+        type="submit"
+        variant="contained"
+      >
+        Log in as user
+      </Button>
+      {loginStatus && (
+        <div className="login-success-message">
+          <p>{loginStatus}</p>
+        </div>
+      )}
     </form>
   );
 };
